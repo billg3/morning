@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>morning | Manhattan AI Social</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <header class="topbar">
+      <div class="logo-wrap">
+        <div class="logo">m</div>
+        <div>
+          <h1>morning</h1>
+          <p>Manhattan AI social lounge</p>
+        </div>
+      </div>
+      <button id="themeToggle" class="ghost-btn" type="button">Night Mode</button>
+    </header>
+
+    <main class="layout">
+      <section class="hero card">
+        <p class="tag">LIVE NOW</p>
+        <h2>Talk smarter. Meet faster. Stay in flow.</h2>
+        <p>
+          morning combines instant video rooms with an AI sidecar that listens to your conversation
+          and suggests follow-up questions, topics, and intros.
+        </p>
+      </section>
+
+      <section class="card zoom-panel">
+        <h3>Auto Video Connect</h3>
+        <p class="subtext">Match to the best live room and auto-join in one click.</p>
+        <form id="zoomForm" class="grid-form">
+          <label>
+            Display name
+            <input id="displayName" required placeholder="Avery from SoHo" />
+          </label>
+          <label>
+            Conversation vibe
+            <input id="meetingId" required placeholder="AI founders + product strategy" />
+          </label>
+          <label>
+            Your goal
+            <input id="meetingPasscode" placeholder="Find growth partners" />
+          </label>
+          <label>
+            Custom room URL (optional)
+            <input id="meetingUrl" placeholder="https://meet.jit.si/morning-..." />
+          </label>
+          <div class="actions">
+            <button class="accent-btn" type="submit">AI Match & Auto-Join</button>
+            <button id="saveProfile" class="ghost-btn" type="button">Save profile</button>
+          </div>
+        </form>
+        <p id="zoomStatus" class="status"></p>
+        <div class="transcript-wrap">
+          <h4>AI-matched room</h4>
+          <div id="matchResult" class="scroll-box" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="card listen-panel">
+        <h3>AI Conversation Radar</h3>
+        <p class="subtext">Use live transcription to capture moments from your live video room.</p>
+        <div class="actions">
+          <button id="startListening" class="accent-btn" type="button">Start listening</button>
+          <button id="stopListening" class="ghost-btn" type="button" disabled>Stop</button>
+          <button id="clearTranscript" class="ghost-btn" type="button">Clear</button>
+        </div>
+        <p id="listenStatus" class="status">Microphone idle.</p>
+        <div class="transcript-wrap">
+          <h4>Live transcript</h4>
+          <div id="transcript" class="scroll-box" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="card agent-panel">
+        <div class="panel-heading">
+          <h3>Agent Concierge</h3>
+          <span class="pill">AI</span>
+        </div>
+        <p class="subtext">
+          Ask for recommendations or let the agent auto-suggest based on transcript highlights.
+        </p>
+        <label>
+          OpenAI API key (optional for advanced responses)
+          <input id="apiKey" type="password" placeholder="sk-..." />
+        </label>
+        <div id="agentFeed" class="scroll-box chat-feed"></div>
+        <form id="agentForm" class="chat-input-row">
+          <input id="agentInput" placeholder="What should I ask next?" required />
+          <button class="accent-btn" type="submit">Send</button>
+        </form>
+      </section>
+
+      <section class="card network-panel">
+        <h3>Nearby Network (local demo)</h3>
+        <p class="subtext">
+          Open morning in another tab to simulate nearby users and quick intros.
+        </p>
+        <form id="presenceForm" class="chat-input-row">
+          <input id="presenceStatus" maxlength="90" placeholder="Status: just left a fintech panel" required />
+          <button class="ghost-btn" type="submit">Broadcast</button>
+        </form>
+        <div id="presenceFeed" class="scroll-box"></div>
+      </section>
+    </main>
+
+    <template id="messageTemplate">
+      <article class="msg">
+        <div class="msg-meta">
+          <strong class="msg-author"></strong>
+          <span class="msg-time"></span>
+        </div>
+        <p class="msg-body"></p>
+      </article>
+    </template>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
