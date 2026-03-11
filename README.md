@@ -1,23 +1,20 @@
-# morning
+# Aerie Revenue Machine
 
-**morning** is a Manhattan-inspired AI networking app for live conversations.
+A full-stack sales execution app for GTM teams.
 
-## Features
+## What it does
 
-- **Zoom launchpad**: save your profile and open a Zoom room directly from the app.
-- **Live AI radar**: optional browser speech recognition captures transcript snippets during calls.
-- **Agent concierge chat**:
-  - works locally with built-in conversation suggestions.
-  - optional OpenAI integration (drop in API key) for richer recommendations.
-- **Nearby network demo**: lightweight local presence feed via `BroadcastChannel` to simulate other users.
-- **Manhattan vibe UI**: glassmorphism + skyline-night styling with day/night mode toggle.
+- **Feature 1: BDR/AE Outreach Assistant**
+  - Generates a multi-touch outbound sequence from lead/account + context inputs.
+- **Feature 2: Pragmatic Business Score Calculator**
+  - Computes weighted readiness score and recommendation tiers.
+- **Feature 3: Cross-Platform Intelligence Agent**
+  - Ingests ZoomInfo + Sales Nav + intent + web clues and optional SFDC CSV text for analysis.
 
 ## Run locally
 
-No build step required.
-
 ```bash
-python3 -m http.server 4173
+npm start
 ```
 
 Then open:
@@ -26,8 +23,13 @@ Then open:
 http://localhost:4173
 ```
 
-## Notes
+## API endpoints
 
-- Zoom integration launches Zoom Web Client via URL.
-- Browser transcription uses `SpeechRecognition` (`webkitSpeechRecognition`), best on Chrome/Edge.
-- OpenAI API key stays in-memory only and is not persisted.
+- `GET /api/health`
+- `GET /api/context`
+- `POST /api/context`
+- `POST /api/outreach`
+- `POST /api/score`
+- `POST /api/intel`
+
+The backend is implemented in `server.js` and serves both static files and JSON APIs.

@@ -3,122 +3,129 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>morning | Manhattan AI Social</title>
+    <title>Aerie Revenue Machine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="scan" aria-hidden="true"></div>
     <header class="topbar">
-      <div class="logo-wrap">
-        <div class="logo">m</div>
+      <div class="brand">
+        <div class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img" aria-label="eagle logo">
+            <path d="M13 41c7-3 12-2 17 1 7 4 14 4 20-1-3 8-9 13-19 13-8 0-14-4-18-13z" fill="#fff" />
+            <path d="M13 41c5-10 9-14 18-18 12-6 20-11 20-11-2 12-8 18-17 24-7 4-13 6-21 5z" fill="#6fe7dd" />
+            <path d="M33 25c2-5 8-9 16-11-1 5-4 9-8 12-4 2-6 2-8-1z" fill="#111" />
+            <circle cx="38" cy="23" r="1.6" fill="#49b6ff" />
+            <path d="M46 28c2 1 3 2 4 4-3 0-5-1-6-3l2-1z" fill="#8e6448" />
+          </svg>
+        </div>
         <div>
-          <h1>morning</h1>
-          <p>Manhattan AI social lounge</p>
+          <h1>Aerie Revenue Machine</h1>
+          <p>Biocomputer-grade sales execution for modern GTM teams</p>
         </div>
       </div>
-      <button id="themeToggle" class="ghost-btn" type="button">Night Mode</button>
+      <button id="themeToggle" class="ghost-btn" type="button">Light mode</button>
     </header>
 
     <main class="layout">
-      <section class="hero card">
-        <p class="tag">LIVE NOW</p>
-        <h2>Talk smarter. Meet faster. Stay in flow.</h2>
+      <section class="panel hero">
+        <p class="kicker">Revenue Operating System</p>
+        <h2>From first touch to account strategy in one intelligent workspace.</h2>
         <p>
-          morning combines live Zoom sessions with an AI sidecar that listens to your conversation
-          and suggests follow-up questions, topics, and intros.
+          Built for BDRs, AEs, and RevOps leaders: generate outreach, score opportunities with
+          Pragmatic Institute principles, and fuse external + CRM data into account intelligence.
         </p>
-      </section>
-
-      <section class="card zoom-panel">
-        <h3>Zoom Connect</h3>
-        <p class="subtext">Join your room and keep morning listening in your browser tab.</p>
-        <form id="zoomForm" class="grid-form">
-          <label>
-            Display name
-            <input id="displayName" required placeholder="Avery from SoHo" />
-          </label>
-          <label>
-            Meeting ID
-            <input id="meetingId" required placeholder="123 456 7890" />
-          </label>
-          <label>
-            Passcode (optional)
-            <input id="meetingPasscode" placeholder="******" />
-          </label>
-          <label>
-            Zoom URL (optional)
-            <input id="meetingUrl" placeholder="https://zoom.us/j/123..." />
-          </label>
-          <div class="actions">
-            <button class="accent-btn" type="submit">Launch Zoom</button>
-            <button id="saveProfile" class="ghost-btn" type="button">Save profile</button>
-          </div>
-        </form>
-        <p id="zoomStatus" class="status"></p>
-      </section>
-
-      <section class="card listen-panel">
-        <h3>AI Conversation Radar</h3>
-        <p class="subtext">Use live transcription to capture moments from your Zoom call.</p>
-        <div class="actions">
-          <button id="startListening" class="accent-btn" type="button">Start listening</button>
-          <button id="stopListening" class="ghost-btn" type="button" disabled>Stop</button>
-          <button id="clearTranscript" class="ghost-btn" type="button">Clear</button>
-        </div>
-        <p id="listenStatus" class="status">Microphone idle.</p>
-        <div class="transcript-wrap">
-          <h4>Live transcript</h4>
-          <div id="transcript" class="scroll-box" aria-live="polite"></div>
+        <div class="chips">
+          <span>Feature 1: BDR/AE Outreach Assistant</span>
+          <span>Feature 2: Pragmatic Business Score Calculator</span>
+          <span>Feature 3: Clay-style Data Fusion + AI Research Agent</span>
         </div>
       </section>
 
-      <section class="card agent-panel">
-        <div class="panel-heading">
-          <h3>Agent Concierge</h3>
-          <span class="pill">AI</span>
-        </div>
-        <p class="subtext">
-          Ask for recommendations or let the agent auto-suggest based on transcript highlights.
-        </p>
-        <label>
-          OpenAI API key (optional for advanced responses)
-          <input id="apiKey" type="password" placeholder="sk-..." />
-        </label>
-        <div id="agentFeed" class="scroll-box chat-feed"></div>
-        <form id="agentForm" class="chat-input-row">
-          <input id="agentInput" placeholder="What should I ask next?" required />
-          <button class="accent-btn" type="submit">Send</button>
+      <section class="panel">
+        <h3>Context Intake Questions</h3>
+        <p class="muted">Answer these to personalize every feature output.</p>
+        <form id="contextForm" class="stack">
+          <label>Primary ICP
+            <input id="icp" required placeholder="VP Sales at B2B SaaS, 50-500 employees" />
+          </label>
+          <label>Main offer
+            <input id="offer" required placeholder="Sales pipeline acceleration platform" />
+          </label>
+          <label>Average contract value (USD)
+            <input id="acv" type="number" min="0" placeholder="24000" />
+          </label>
+          <label>Sales motion
+            <select id="motion">
+              <option>Outbound-led</option>
+              <option>PLG + sales assist</option>
+              <option>Enterprise field sales</option>
+            </select>
+          </label>
+          <button class="accent-btn" type="submit">Save context</button>
         </form>
+        <p id="contextStatus" class="status">No context saved yet.</p>
       </section>
 
-      <section class="card network-panel">
-        <h3>Nearby Network (local demo)</h3>
-        <p class="subtext">
-          Open morning in another tab to simulate nearby users and quick intros.
-        </p>
-        <form id="presenceForm" class="chat-input-row">
-          <input id="presenceStatus" maxlength="90" placeholder="Status: just left a fintech panel" required />
-          <button class="ghost-btn" type="submit">Broadcast</button>
+      <section class="panel">
+        <h3>Feature 1 · BDR/AE Assistant for Outreach</h3>
+        <form id="outreachForm" class="stack">
+          <label>Lead / account name <input id="leadName" required placeholder="Jordan Lee" /></label>
+          <label>Company <input id="company" required placeholder="Northstar Security" /></label>
+          <label>Pain point <input id="pain" required placeholder="Low email reply rates from enterprise buyers" /></label>
+          <label>Intent signal <input id="signal" placeholder="Viewed pricing page 3x this week" /></label>
+          <button class="accent-btn" type="submit">Generate outreach sequence</button>
         </form>
-        <div id="presenceFeed" class="scroll-box"></div>
+        <div id="outreachOutput" class="output"></div>
+      </section>
+
+      <section class="panel">
+        <h3>Feature 2 · Pragmatic Institute Business Score Calculator</h3>
+        <p class="muted">Score each dimension from 1-10. The machine computes weighted readiness.</p>
+        <form id="scoreForm" class="matrix">
+          <label>Market problem clarity <input id="problem" type="range" min="1" max="10" value="6" /></label>
+          <label>Buyer persona specificity <input id="persona" type="range" min="1" max="10" value="6" /></label>
+          <label>Competitive differentiation <input id="differentiation" type="range" min="1" max="10" value="6" /></label>
+          <label>Win/loss learning loop <input id="winloss" type="range" min="1" max="10" value="6" /></label>
+          <label>Go-to-market readiness <input id="gtm" type="range" min="1" max="10" value="6" /></label>
+          <button class="accent-btn" type="submit">Calculate score</button>
+        </form>
+        <div id="scoreOutput" class="output"></div>
+      </section>
+
+      <section class="panel full">
+        <h3>Feature 3 · Cross-Platform Intelligence + AI Agent</h3>
+        <p class="muted">
+          Paste ZoomInfo, Sales Navigator, and intent snippets. Upload SFDC CSV for account/lead
+          matching. The agent cross-references data and returns action-ready research.
+        </p>
+        <form id="intelForm" class="stack">
+          <label>ZoomInfo snippet
+            <textarea id="zoominfo" rows="3" placeholder="Northstar Security raised Series B in Jan, hiring 3 BDRs"></textarea>
+          </label>
+          <label>Sales Nav snippet
+            <textarea id="salesnav" rows="3" placeholder="Jordan Lee posted about outbound process gaps"></textarea>
+          </label>
+          <label>Intent topics
+            <input id="intent" placeholder="sales engagement, prospecting automation" />
+          </label>
+          <label>Web research clue
+            <input id="web" placeholder="Look for latest product launch and hiring trend" />
+          </label>
+          <label>SFDC export (.csv)
+            <input id="sfdcFile" type="file" accept=".csv,text/csv" />
+          </label>
+          <button class="accent-btn" type="submit">Run intelligence analysis</button>
+        </form>
+        <div id="intelOutput" class="output"></div>
       </section>
     </main>
-
-    <template id="messageTemplate">
-      <article class="msg">
-        <div class="msg-meta">
-          <strong class="msg-author"></strong>
-          <span class="msg-time"></span>
-        </div>
-        <p class="msg-body"></p>
-      </article>
-    </template>
 
     <script type="module" src="app.js"></script>
   </body>
