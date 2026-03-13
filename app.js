@@ -19,6 +19,13 @@ const els = {
   presenceForm: document.querySelector('#presenceForm'),
   presenceStatus: document.querySelector('#presenceStatus'),
   presenceFeed: document.querySelector('#presenceFeed'),
+  brokerForm: document.querySelector('#brokerForm'),
+  humanA: document.querySelector('#humanA'),
+  humanB: document.querySelector('#humanB'),
+  relationshipContext: document.querySelector('#relationshipContext'),
+  bookingGoal: document.querySelector('#bookingGoal'),
+  timeWindow: document.querySelector('#timeWindow'),
+  brokerResult: document.querySelector('#brokerResult'),
   messageTemplate: document.querySelector('#messageTemplate'),
 };
 
@@ -56,6 +63,7 @@ function bindEvents() {
   els.clearTranscript.addEventListener('click', clearTranscript);
   els.agentForm.addEventListener('submit', onAgentAsk);
   els.presenceForm.addEventListener('submit', onPresenceUpdate);
+  els.brokerForm.addEventListener('submit', onBrokerSubmit);
 
   presenceChannel.onmessage = (event) => {
     const item = event.data;
@@ -298,6 +306,94 @@ function pushAgentMessage(author, body) {
   node.querySelector('.msg-body').textContent = body;
   els.agentFeed.append(node);
   els.agentFeed.scrollTop = els.agentFeed.scrollHeight;
+}
+
+
+function onBrokerSubmit(event) {
+  event.preventDefault();
+
+  const payload = {
+    humanA: els.humanA.value.trim(),
+    humanB: els.humanB.value.trim(),
+    relationshipContext: els.relationshipContext.value.trim(),
+    bookingGoal: els.bookingGoal.value.trim(),
+    timeWindow: els.timeWindow.value.trim(),
+  };
+
+  if (!payload.humanA || !payload.humanB || !payload.relationshipContext || !payload.bookingGoal || !payload.timeWindow) {
+    renderBrokerResult({
+      shouldBook: false,
+      confidence: 'low',
+      reason: 'Missing context. Add both names, relationship details, a goal, and a time window.',
+      agenda: [],
+      proposedSlot: 'Not scheduled',
+      nextStep: 'Complete all fields so both agents can reason over the relationship.',
+    });
+    return;
+  }
+
+  const decision = reasonAndAutoBook(payload);
+  renderBrokerResult(decision);
+
+  const msg = decision.shouldBook
+    ? `Auto-booked ${decision.proposedSlot} for ${payload.humanA} + ${payload.humanB}.`
+    : `No booking yet for ${payload.humanA} + ${payload.humanB}.`;
+
+  pushAgentMessage('Broker Agent', `${decision.reason} ${msg}`);
+}
+
+function reasonAndAutoBook(payload) {
+  const source = [payload.relationshipContext, payload.bookingGoal].join(' ').toLowerCase();
+  let score = 0;
+
+  const signals = [
+    { words: ['former teammate', 'worked together', 'trusted', 'friend', 'mentor'], points: 3 },
+    { words: ['intro', 'partnership', 'collaborat', 'customer', 'investor', 'fundraise'], points: 2 },
+    { words: ['urgent', 'launch', 'hiring', 'roadmap', 'strategy'], points: 1 },
+  ];
+
+  signals.forEach((signal) => {
+    if (signal.words.some((word) => source.includes(word))) {
+      score += signal.points;
+    }
+  });
+
+  const shouldBook = score >= 3;
+  const confidence = score >= 5 ? 'high' : score >= 3 ? 'medium' : 'low';
+  const reason = shouldBook
+    ? `Both agents found strong human-to-human value: ${payload.humanA} and ${payload.humanB} share relationship trust and a clear mutual objective.`
+    : `Agents recommend gathering more context before booking. Relationship strength or meeting objective is not specific enough yet.`;
+
+  return {
+    shouldBook,
+    confidence,
+    reason,
+    agenda: shouldBook
+      ? [
+          `5 min: reconnect on ${payload.relationshipContext}`,
+          `10 min: align on ${payload.bookingGoal}`,
+          '10 min: define one shared next action and owner',
+        ]
+      : [],
+    proposedSlot: shouldBook ? proposeSlot(payload.timeWindow) : 'Pending more details',
+    nextStep: shouldBook
+      ? 'Calendar hold created by Broker Agent. Confirm attendee emails and meeting link.'
+      : 'Add one concrete shared goal and one recent relationship signal to unlock auto-booking.',
+  };
+}
+
+function proposeSlot(timeWindow) {
+  const day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday'][new Date().getDay() % 4];
+  return `${day}, ${timeWindow}`;
+}
+
+function renderBrokerResult(result) {
+  const icon = result.shouldBook ? '✅' : '🟡';
+  const agenda = result.agenda.length
+    ? result.agenda.map((item) => `• ${item}`).join('\n')
+    : '• No agenda generated yet.';
+
+  els.brokerResult.textContent = `${icon} Decision: ${result.shouldBook ? 'BOOK CALL' : 'HOLD'}\nConfidence: ${result.confidence}\nReason: ${result.reason}\nProposed slot: ${result.proposedSlot}\nNext step: ${result.nextStep}\n\nAgenda\n${agenda}`;
 }
 
 function onPresenceUpdate(event) {

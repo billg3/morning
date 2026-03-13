@@ -112,6 +112,10 @@ h1 + p {
   grid-column: span 6;
 }
 
+.broker-panel {
+  grid-column: span 12;
+}
+
 .tag {
   color: var(--accent-2);
   letter-spacing: 0.08em;
@@ -276,4 +280,15 @@ body.day .scroll-box {
   .grid-form {
     grid-template-columns: 1fr;
   }
+}
+
+
+.broker-form label:nth-child(5),
+.broker-form .actions {
+  grid-column: span 2;
+}
+
+.broker-result {
+  margin-top: 0.75rem;
+  white-space: pre-line;
 }

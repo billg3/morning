@@ -108,6 +108,42 @@
         </form>
         <div id="presenceFeed" class="scroll-box"></div>
       </section>
+
+      <section class="card broker-panel">
+        <div class="panel-heading">
+          <h3>Agent-to-Agent Call Broker</h3>
+          <span class="pill">AUTO BOOK</span>
+        </div>
+        <p class="subtext">
+          Let two AI agents reason about whether two humans should meet, then auto-book a proposed call.
+        </p>
+        <form id="brokerForm" class="grid-form broker-form">
+          <label>
+            Human A
+            <input id="humanA" placeholder="Jordan (Product Lead)" required />
+          </label>
+          <label>
+            Human B
+            <input id="humanB" placeholder="Riley (Data Scientist)" required />
+          </label>
+          <label>
+            Relationship context
+            <input id="relationshipContext" placeholder="Former teammates now in different startups" required />
+          </label>
+          <label>
+            Booking goal
+            <input id="bookingGoal" placeholder="Discuss GTM + AI roadmap partnership" required />
+          </label>
+          <label>
+            Time window
+            <input id="timeWindow" placeholder="Next week, afternoons ET" required />
+          </label>
+          <div class="actions">
+            <button class="accent-btn" type="submit">Reason & auto-book</button>
+          </div>
+        </form>
+        <div id="brokerResult" class="scroll-box broker-result"></div>
+      </section>
     </main>
 
     <template id="messageTemplate">
